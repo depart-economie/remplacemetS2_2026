@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>برامج الامتحانات</title>
+
+  <style>
+    :root {
+      --primary: #1e3a5f;
+      --secondary: #0f766e;
+      --accent: #f59e0b;
+      --bg: #eef3f8;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #64748b;
+      --border: #dbe4ef;
+      --success: #ecfdf5;
+      --warning: #fff7ed;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, #e8f1f8, #f8fafc);
+      margin: 0;
+      padding: 25px;
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+      background: var(--card);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      border: 1px solid var(--border);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 35px 25px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.8;
+    }
+
+    .hero p {
+      margin: 8px 0 0;
+      color: #dbeafe;
+      font-size: 15px;
+    }
+
+    .content {
+      padding: 28px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--primary);
+      background: #f8fafc;
+      font-size: 16px;
+      transition: 0.25s;
+    }
+
+    .tabs button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    .tabs button.active {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: white;
+      border-color: transparent;
+    }
+
+    .form-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: var(--primary);
+      font-size: 14px;
+    }
+
+    select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-size: 15px;
+      background: white;
+      color: var(--text);
+      outline: none;
+    }
+
+    select:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+    }
+
+    select:disabled {
+      background: #edf2f7;
+      color: var(--muted);
+      cursor: not-allowed;
+    }
+
+    .search-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), #ea580c);
+      transition: 0.25s;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(245, 158, 11, 0.28);
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-right: 7px solid var(--secondary);
+      padding: 22px;
+      margin-bottom: 18px;
+      border-radius: 20px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin: 0 0 18px;
+      font-size: 22px;
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+    }
+
+    .item {
+      background: #f8fafc;
+      padding: 13px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .label {
+      font-weight: bold;
+      color: var(--secondary);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      min-width: 650px;
+    }
+
+    th, td {
+      padding: 13px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .message {
+      text-align: center;
+      padding: 20px;
+      border-radius: 16px;
+      background: var(--warning);
+      color: #9a3412;
+      font-weight: bold;
+      border: 1px solid #fed7aa;
+    }
+
+    .download-btn {
+      margin-top: 18px;
+      padding: 13px 22px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      transition: 0.25s;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(15, 118, 110, 0.25);
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 12px;
+      }
+
+      .content {
+        padding: 18px;
+      }
+
+      .tabs {
+        flex-direction: column;
+      }
+
+      .hero h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="hero">
+    <h1>برنامج الاطلاع على الأوراق والامتحانات التعويضية</h1>
+    <p>اختر المستوى ثم التخصص ثم المقياس لعرض البرنامج المناسب</p>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button id="consultationBtn" class="active" onclick="setType('consultation')">
+        برنامج الاطلاع على الأوراق
+      </button>
+      <button id="replacementBtn" onclick="setType('replacement')">
+        برنامج الامتحانات التعويضية
+      </button>
+    </div>
+
+    <div class="form-box">
+      <div class="form-grid">
+        <div class="field">
+          <label>المستوى</label>
+          <select id="levelSelect" onchange="loadSpecialities()">
+            <option value="">اختر المستوى</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>التخصص</label>
+          <select id="specialitySelect" onchange="loadModules()" disabled>
+            <option value="">اختر التخصص</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>المقياس</label>
+          <select id="moduleSelect" onchange="searchProgram()" disabled>
+            <option value="">اختر المقياس</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="search-btn" onclick="searchProgram()">عرض البرنامج</button>
+    </div>
+
+    <div id="results"></div>
+  </div>
+</div>
+
+<script>
+  let currentType = "consultation";
+  let currentStudents = [];
+
+  function setType(type) {
+    currentType = type;
+    currentStudents = [];
+
+    document.getElementById("consultationBtn").classList.remove("active");
+    document.getElementById("replacementBtn").classList.remove("active");
+
+    if (type === "consultation") {
+      document.getElementById("consultationBtn").classList.add("active");
+    } else {
+      document.getElementById("replacementBtn").classList.add("active");
+    }
+
+    resetAll();
+    loadLevels();
+  }
+
+  function resetAll() {
+    document.getElementById("results").innerHTML = "";
+    document.getElementById("levelSelect").innerHTML = `<option value="">اختر المستوى</option>`;
+    document.getElementById("specialitySelect").innerHTML = `<option value="">اختر التخصص</option>`;
+    document.getElementById("moduleSelect").innerHTML = `<option value="">اختر المقياس</option>`;
+
+    document.getElementById("specialitySelect").disabled = true;
+    document.getElementById("moduleSelect").disabled = true;
+  }
+
+  function loadLevels() {
+    google.script.run
+      .withSuccessHandler(function(levels) {
+        const select = document.getElementById("levelSelect");
+        select.innerHTML = `<option value="">اختر المستوى</option>`;
+
+        levels.forEach(level => {
+          select.innerHTML += `<option value="${level}">${level}</option>`;
+        });
+      })
+      .getLevels(currentType);
+  }
+
+  function loadSpecialities() {
+    const level = document.getElementById("levelSelect").value;
+
+    document.getElementById("results").innerHTML = "";
+    document.getElementById("specialitySelect").innerHTML = `<option value="">اختر التخصص</option>`;
+    document.getElementById("moduleSelect").innerHTML = `<option value="">اختر المقياس</option>`;
+    document.getElementById("moduleSelect").disabled = true;
+
+    if (!level) {
+      document.getElementById("specialitySelect").disabled = true;
+      return;
+    }
+
+    google.script.run
+      .withSuccessHandler(function(specialities) {
+        const select = document.getElementById("specialitySelect");
+        select.disabled = false;
+
+        specialities.forEach(spec => {
+          select.innerHTML += `<option value="${spec}">${spec}</option>`;
+        });
+      })
+      .getSpecialities(currentType, level);
+  }
+
+  function loadModules() {
+    const level = document.getElementById("levelSelect").value;
+    const speciality = document.getElementById("specialitySelect").value;
+
+    document.getElementById("results").innerHTML = "";
+    document.getElementById("moduleSelect").innerHTML = `<option value="">اختر المقياس</option>`;
+
+    if (!level || !speciality) {
+      document.getElementById("moduleSelect").disabled = true;
+      return;
+    }
+
+    google.script.run
+      .withSuccessHandler(function(modules) {
+        const select = document.getElementById("moduleSelect");
+        select.disabled = false;
+
+        modules.forEach(module => {
+          select.innerHTML += `<option value="${module}">${module}</option>`;
+        });
+      })
+      .getModules(currentType, level, speciality);
+  }
+
+  function searchProgram() {
+    const level = document.getElementById("levelSelect").value;
+    const speciality = document.getElementById("specialitySelect").value;
+    const moduleName = document.getElementById("moduleSelect").value;
+    const resultsDiv = document.getElementById("results");
+
+    if (!level || !speciality || !moduleName) {
+      resultsDiv.innerHTML = `<div class="message">يرجى اختيار المستوى ثم التخصص ثم المقياس.</div>`;
+      return;
+    }
+
+    resultsDiv.innerHTML = `<div class="message">جاري البحث...</div>`;
+
+    google.script.run
+      .withSuccessHandler(function(data) {
+        if (currentType === "consultation") {
+          displayConsultation(data);
+        } else {
+          displayReplacement(data);
+        }
+      })
+      .withFailureHandler(function(error) {
+        resultsDiv.innerHTML = `<div class="message">حدث خطأ: ${error.message}</div>`;
+      })
+      .getProgram(currentType, level, speciality, moduleName);
+  }
+
+  function displayConsultation(data) {
+    const resultsDiv = document.getElementById("results");
+
+    if (data.count === 0) {
+      resultsDiv.innerHTML = `<div class="message">لا يوجد برنامج اطلاع على الأوراق لهذا المقياس.</div>`;
+      return;
+    }
+
+    let html = "";
+
+    data.results.forEach(item => {
+      html += `
+        <div class="card">
+          <h3>${item.module}</h3>
+          <div class="info">
+            <div class="item"><span class="label">التخصص</span>${item.speciality}</div>
+            <div class="item"><span class="label">المستوى</span>${item.level}</div>
+            <div class="item"><span class="label">اليوم</span>${item.day}</div>
+            <div class="item"><span class="label">التاريخ</span>${item.date}</div>
+            <div class="item"><span class="label">التوقيت</span>${item.time}</div>
+            <div class="item"><span class="label">المكان</span>${item.place}</div>
+          </div>
+        </div>
+      `;
+    });
+
+    resultsDiv.innerHTML = html;
+  }
+
+  function displayReplacement(data) {
+    const resultsDiv = document.getElementById("results");
+
+    if (!data.programmed) {
+      currentStudents = [];
+      resultsDiv.innerHTML = `<div class="message">${data.message}</div>`;
+      return;
+    }
+
+    currentStudents = data.students;
+
+    let html = `
+      <div class="card">
+        <h3>${data.exam.module}</h3>
+
+        <div class="info">
+          <div class="item"><span class="label">التخصص</span>${data.exam.speciality}</div>
+          <div class="item"><span class="label">المستوى</span>${data.exam.level}</div>
+          <div class="item"><span class="label">اليوم</span>${data.exam.day}</div>
+          <div class="item"><span class="label">التاريخ</span>${data.exam.date}</div>
+          <div class="item"><span class="label">التوقيت</span>${data.exam.time}</div>
+          <div class="item"><span class="label">المكان</span>${data.exam.place}</div>
+        </div>
+
+        <button class="download-btn" onclick="downloadStudents()">
+          تحميل قائمة الطلبة XLS
+        </button>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>الاسم</th>
+                <th>اللقب</th>
+                <th>رقم التسجيل</th>
+                <th>التخصص</th>
+                <th>المستوى</th>
+              </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.students.forEach(st => {
+      html += `
+        <tr>
+          <td>${st.firstName}</td>
+          <td>${st.lastName}</td>
+          <td>${st.regNumber}</td>
+          <td>${st.speciality}</td>
+          <td>${st.level}</td>
+        </tr>
+      `;
+    });
+
+    html += `
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    resultsDiv.innerHTML = html;
+  }
+
+  function downloadStudents() {
+  if (!currentStudents.length) return;
+
+  const level = currentStudents[0].level || "";
+  const speciality = currentStudents[0].speciality || "";
+  const moduleName = currentStudents[0].module || "";
+
+  let table = `
+    <table style="border-collapse:collapse; width:100%; direction:rtl; text-align:center; font-family:Tahoma;">
+      
+      <tr>
+        <td colspan="4" style="border:none; font-weight:bold; font-size:18px; padding:6px;">
+          كلية العلوم الاقتصادية التجارية وعلوم التسيير
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" style="border:none; font-weight:bold; font-size:16px; padding:6px;">
+          قسم العلوم الاقتصادية
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" style="border:none; font-weight:bold; font-size:16px; padding:6px;">
+          ${level} ${speciality}
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" style="border:none; padding:10px;"></td>
+      </tr>
+
+      <tr>
+        <td colspan="4" style="border:none; font-weight:bold; font-size:22px; padding:12px; text-align:center;">
+          قائمة الطلبة المعنيين بامتحان مقياس "${moduleName}"
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" style="border:none; padding:8px;"></td>
+      </tr>
+
+      <tr>
+        <th style="border:1px solid #000; padding:9px; font-weight:bold;">رقم التسجيل</th>
+        <th style="border:1px solid #000; padding:9px; font-weight:bold;">الاسم</th>
+        <th style="border:1px solid #000; padding:9px; font-weight:bold;">اللقب</th>
+        <th style="border:1px solid #000; padding:9px; font-weight:bold;">الإمضاء</th>
+      </tr>
+  `;
+
+  currentStudents.forEach(st => {
+    table += `
+      <tr>
+        <td style="border:1px solid #000; padding:9px;">${st.regNumber}</td>
+        <td style="border:1px solid #000; padding:9px;">${st.firstName}</td>
+        <td style="border:1px solid #000; padding:9px;">${st.lastName}</td>
+        <td style="border:1px solid #000; padding:9px; width:160px;"></td>
+      </tr>
+    `;
+  });
+
+  table += `</table>`;
+
+  const excelFile = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+      <meta charset="UTF-8">
+    </head>
+    <body>
+      ${table}
+    </body>
+    </html>
+  `;
+
+  const blob = new Blob(["\uFEFF" + excelFile], {
+    type: "application/vnd.ms-excel;charset=utf-8;"
+  });
+
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `قائمة الطلبة - ${moduleName}.xls`;
+  link.click();
+}
+
+  window.onload = function() {
+    loadLevels();
+  };
+</script>
+
+</body>
+</html>
